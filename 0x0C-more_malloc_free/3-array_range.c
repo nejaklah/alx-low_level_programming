@@ -1,30 +1,31 @@
 #include "main.h"
-#include <stdio.h>
 #include <stdlib.h>
-/**
- **_realloc - reallocates a memory block using malloc and free
- *@ptr : pointer
- *@old_size : int
- *@new_size : int
- *Return: pointer
- */
-void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
-{
-	char *tmp;
 
-	if (new_size == old_size)
-		return (ptr);
-	if (new_size == 0 && ptr != NULL)
-	{
-		free(ptr);
+/**
+  * array_range - ...
+  * @min: ...
+  * @max: ...
+  *
+  * Return: integer value
+  */
+int *array_range(int min, int max)
+{
+	int *a, i = 0;
+
+	if (min > max)
 		return (NULL);
-	}
-	if (ptr == NULL)
+
+	a = malloc((sizeof(int) * (max - min)) + sizeof(int));
+
+	if (a == NULL)
+		return (NULL);
+
+	while (min <= max)
 	{
-		ptr = malloc(new_size);
-		return (ptr);
+		a[i] = min;
+		i++;
+		min++;
 	}
-	tmp = malloc(new_size);
-	free(ptr);
-	return (tmp);
+
+	return (a);
 }
